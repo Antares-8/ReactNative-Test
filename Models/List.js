@@ -1,5 +1,5 @@
 import React from 'react'
-import { View,  StyleSheet, Text, Button, TextInput, FlatList, Alert} from 'react-native'
+import { View,  StyleSheet, Text, Button, TextInput, FlatList, Alert, TouchableOpacity, TouchableHighlight} from 'react-native'
 import Note from './Note'
 
 /*
@@ -72,7 +72,7 @@ export default class Notes extends React.Component {
         super(props)
         this.currentText= ""
         this.state = {
-            NoteList: [{id:"0", text:"Notesss"}],
+            NoteList: [{id:"0", text:"Notes"}],
             counter: 1
         }
     }
@@ -93,7 +93,7 @@ export default class Notes extends React.Component {
             this.currentText = ""
         }
         else
-            Alert.alert("Please enter a Note")
+            Alert.alert("Merci d'ajouter une note")
         this.textInput.clear()
     }
     render() {
@@ -106,8 +106,9 @@ export default class Notes extends React.Component {
                 onChangeText={(text) => this._newLetter(text)}
                 onSubmitEditing={() => this._addNote()}
             />
-            <Button title='Ajouter' onPress={() => {this._addNote()}}/>
+                <Button title='Ajouter' onPress={() => {this._addNote()}}/>
             <FlatList
+                style={styles.flatList}
                 data={this.state.NoteList}
                 keyExtractor={(item) => item.id}
                 renderItem={({item}) => <Note  leText= {item.text} />}
@@ -121,9 +122,13 @@ const styles = StyleSheet.create({
     textinput: {
       marginLeft: 5,
       marginRight: 5,
+      marginTop: 10,
       height: 50,
       borderColor: '#000000',
       borderWidth: 1,
       paddingLeft: 5
+    },
+    flatList: {
+        backgroundColor: '#0ac3a7'
     }
   })
